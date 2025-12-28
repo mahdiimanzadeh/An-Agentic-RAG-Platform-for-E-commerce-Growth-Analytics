@@ -111,7 +111,7 @@ class CSVImporter:
         
         df_clean = df_clean.replace([np.inf, -np.inf], np.nan)
         
-        # Convert ALL columns to object to ensure we can store None
+        # Convert ALL columns to object to ensure we can store None, this must be rechecked for performance issues
         df_clean = df_clean.astype(object)
         
         df_clean = df_clean.where(pd.notnull(df_clean), None)

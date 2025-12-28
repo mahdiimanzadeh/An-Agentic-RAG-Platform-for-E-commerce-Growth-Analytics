@@ -19,14 +19,32 @@ services:
       timeout: 5s
       retries: 5
 
-  # Placeholder for future application service
-  # app:
-  #   build: ..
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
-  #   environment:
-  #     DATABASE_URL: postgresql://user:password@db:5432/ecommerce_rag
+  app:
+      build:
+        context: ..
+        dockerfile: Dockerfile
+      container_name: ecommerce_rag_app
+      env_file: ../.env  
+      depends_on:
+        db:
+          condition: service_healthy #  Healthcheck
+      ports:
+        - "8501:8501"
+      volumes:
+        - ..:/appود
+      command: streamlit run app.py --server.address=0.0.0.0
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ../prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    depends_on:
+      - app
 
 volumes:
   postgres_data:

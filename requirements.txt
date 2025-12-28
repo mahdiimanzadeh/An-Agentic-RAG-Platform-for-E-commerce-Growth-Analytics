@@ -5,3 +5,11 @@ psycopg2-binary
 pydantic
 pydantic-settings
 python-dotenv
+langchain
+langgraph
+langchain-openai
+langchain-community
+streamlit
+plotly
+prometheus_client
+tabulate

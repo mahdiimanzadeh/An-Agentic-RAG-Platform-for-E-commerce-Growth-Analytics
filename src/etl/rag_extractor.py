@@ -8,25 +8,12 @@ class RAGDataExtractor:
     """
 
     def __init__(self, db_manager: DatabaseManager):
-        """
-        Initialize the extractor.
-
-        Args:
-            db_manager: An instance of DatabaseManager.
-        """
         self.db_manager = db_manager
         self.logger = db_manager.logger
 
     def extract_reviews(self, limit: int = 1000, output_path: str = 'rag_text_data.csv') -> pd.DataFrame:
         """
         Extract review comments and titles for RAG processing.
-
-        Args:
-            limit: Maximum number of reviews to extract.
-            output_path: Path to save the extracted CSV.
-
-        Returns:
-            DataFrame containing the extracted data.
         """
         query = f"""
         SELECT 

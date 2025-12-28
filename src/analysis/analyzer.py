@@ -10,13 +10,7 @@ class ECommerceAnalyzer:
     """
 
     def __init__(self, db_manager: DatabaseManager, output_dir: str = "analysis_outputs"):
-        """
-        Initialize the analyzer.
-
-        Args:
-            db_manager: An instance of DatabaseManager.
-            output_dir: Directory to save plots and reports.
-        """
+        
         self.db_manager = db_manager
         self.output_dir = output_dir
         self.logger = db_manager.logger
@@ -44,7 +38,6 @@ class ECommerceAnalyzer:
             df = pd.read_sql(query, self.db_manager.engine)
             self.logger.info(f"Fetched customer demographics: {len(df)} rows")
             
-            # Visualization
             plt.figure(figsize=(12, 6))
             sns.barplot(data=df, x='customer_state', y='customer_count', palette='viridis')
             plt.title('Top 10 States by Customer Count')
